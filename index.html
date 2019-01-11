@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <login>
+      <!-- login 是一个变量  它会把传输过来的数据添加作为属性 -->
+      <template scope="login">
+        
+        <p>{{login.item.id}}</p>
+        <h2>{{login.item.name}}</h2>
+      </template>
+    </login>
+  </div>
+
+  <template id="tmpl">
+    <div>
+      <p v-for="item in list" :key="item.id">
+        <!-- 插槽 用来占位置 -->
+        <slot :item="item"></slot>
+      </p>
+    </div>
+  </template>
+
+  <script src="../node_modules/vue/dist/vue.min.js"></script>
+  <script>
+
+    const login = {
+      template:'#tmpl',
+      data: () => ({
+        list: [
+          {id:1,name:'zs'},
+          {id:2,name:'ww'},
+          {id:3,name:'ls'}
+        ]
+      })
+    }
+
+    Vue.component('login',login)
+
+    var vm = new Vue({
+      el:'#app',
+      data:{},
+      methods:{}
+    })
+  </script>
+</body>
+</html>
